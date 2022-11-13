@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { LoginService } from 'src/app/resources/services/login.service';
 import { RequestLogin } from 'src/app/resources/models/RequestLogin';
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private loginService: LoginService,
-    private alertService: AlertService) { }
+    private alertService: AlertService,
+    private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -25,7 +27,7 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.requestLogin)
       .subscribe({
         next: (data: ResponseLogin) => {
-          this.alertService.info('Funcionalidade ainda não implementada!');
+          this.router.navigate(['dashboard']);
         },
         error: (e: any) => {
           this.alertService.error(e.error.message);
